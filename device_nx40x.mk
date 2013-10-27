@@ -128,11 +128,11 @@ PRODUCT_COPY_FILES += \
 
 # Missing libs
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/libs/sensors.has_gyro.so:system/lib/hw/sensors.has_gyro.so
-#    $(LOCAL_PATH)/libs/gps.default.so:system/lib/hw/gps.default.so \
-#    $(LOCAL_PATH)/libs/nfc.default.so:system/lib/hw/nfc.default.so \
-#    $(LOCAL_PATH)/libs/sensors.msm8930.so:system/lib/hw/sensors.msm8930.so
-#    $(LOCAL_PATH)/libs/gestures.msm8960.so:system/lib/hw/gestures.msm8960.so \
+    $(LOCAL_PATH)/libs/sensors.has_gyro.so:system/lib/hw/sensors.has_gyro.so \
+    $(LOCAL_PATH)/libs/gps.default.so:system/lib/hw/gps.default.so \
+    $(LOCAL_PATH)/libs/nfc.default.so:system/lib/hw/nfc.default.so \
+    $(LOCAL_PATH)/libs/sensors.msm8930.so:system/lib/hw/sensors.msm8930.so \
+    $(LOCAL_PATH)/libs/gestures.msm8960.so:system/lib/hw/camera.msm8960.so
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -164,9 +164,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
         rild.libpath=/system/lib/libril-qc-qmi-1.so
 
-#PRODUCT_PROPERTY_OVERRIDES += \
-#        wifi.interface=wlan0 \
-#        wifi.supplicant_scan_interval=15
+PRODUCT_PROPERTY_OVERRIDES += \
+        wifi.interface=wlan0 \
+        wifi.supplicant_scan_interval=15
 
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.opengles.version=131072
@@ -204,18 +204,18 @@ PRODUCT_PACKAGES += \
         conn_init
 
 # Camera
-PRODUCT_PACKAGES += \
-    camera.msm8960 \
+#PRODUCT_PACKAGES += \
     libmmcamera_interface2 \
     libmmcamera_interface
+#    camera.msm8960 \
 
 # GPS
 PRODUCT_PACKAGES += \
     libloc_adapter \
     libloc_eng \
     libloc_api_v02 \
-    libgps.utils \
-    gps.msm8960
+    libgps.utils
+#    gps.msm8960
 
 # Graphics
 PRODUCT_PACKAGES += \
