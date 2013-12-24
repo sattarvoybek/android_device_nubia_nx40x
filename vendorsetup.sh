@@ -15,3 +15,4 @@
 #
 
 add_lunch_combo cm_nx40x-userdebug
+add_lunch_combo cm_nx40x-user

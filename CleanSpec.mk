@@ -34,9 +34,9 @@
 # made today requires touching the same file, just copy the old
 # touch step and add it to the end of the list.
 #
-# ************************************************
+# ******************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
-# ************************************************
+# ******************************************************
 
 # For example:
 #$(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/APPS/AndroidTests_intermediates)
@@ -51,14 +51,13 @@ $(call add-clean-step, find $(OUT_DIR) -name "wpa_supplicant*" -print0 | xargs -
 $(call add-clean-step, find $(PRODUCT_OUT) -name "*.img" -print0 | xargs -0 rm -f)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/SHARED_LIBRARIES/libhardware_legacy_intermediates/)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/modules/wlan.ko)
-$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/system/build.prop)
-$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/system/build.prop)
-$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/system/build.prop)
-$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/system/build.prop)
-$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/root/default.prop)
-$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/recovery/root/default.prop)
-$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/system/build.prop)
-$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/root/default.prop)
+$(call add-clean-step, rm -rf $(OUT_DIR)/target/product/nx40x/root)
+$(call add-clean-step, rm -rf $(OUT_DIR)/target/product/nx40x/recovery)
+$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/kernel)
+$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/system/*audio*.so)
+$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/system/*hwcompser*.so)
+$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/system/*gralloc*.so)
+$(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/system/*copybit*.so)
 $(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/recovery/root/default.prop)
 $(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/system/build.prop)
 $(call add-clean-step, rm -f $(OUT_DIR)/target/product/nx40x/root/default.prop)

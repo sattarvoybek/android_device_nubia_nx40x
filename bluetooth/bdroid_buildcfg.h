@@ -17,7 +17,7 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#define BTM_DEF_LOCAL_NAME   "Nubia NX40X"
+#define BTM_DEF_LOCAL_NAME   "Nubia Z5 MINI"
 #define BTA_DISABLE_DELAY 1000 /* in milliseconds */
 
 #endif
