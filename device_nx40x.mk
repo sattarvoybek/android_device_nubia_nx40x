@@ -14,7 +14,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/lib/hw/camera.msm8960.so:system/lib/hw/camera.msm8960.so \
     $(LOCAL_PATH)/lib/hw/gps.default.so:system/lib/hw/gps.default.so \
     $(LOCAL_PATH)/lib/hw/nfc.default.so:system/lib/hw/nfc.default.so \
-    $(LOCAL_PATH)/lib/hw/sensors.msm8930.so:system/lib/hw/sensors.msm8930.so
+    $(LOCAL_PATH)/lib/hw/sensors.msm8930.so:system/lib/hw/sensors.msm8930.so \
+    $(LOCAL_PATH)/lib/hw/audio.a2dp.default.so:system/lib/hw/audio.a2dp.default.so \
+    $(LOCAL_PATH)/lib/hw/audio.primary.msm8960.so:system/lib/hw/audio.primary.msm8960.so \
+    $(LOCAL_PATH)/lib/hw/audio.r_submix.default.so:system/lib/hw/audio.r_submix.default.so
 
 # Snd_soc_msm
 PRODUCT_COPY_FILES += \
@@ -131,14 +134,13 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/sec_config:system/etc/sec_config
 # Audio
 PRODUCT_PACKAGES += \
     alsa.msm8960 \
-    audio.a2dp.default \
     audio_policy.msm8960 \
-    audio.primary.msm8960 \
-    audio.r_submix.default \
     audio.usb.default \
     libalsa-intf \
     libmm-audio-resampler \
     libaudioparameter \
+    libaudio-resampler \
+    libaudioutils \
     tinymix \
     qcmediaplayer
 
@@ -168,8 +170,7 @@ PRODUCT_PACKAGES += \
     libwfcu \
     conn_init \
     libnetcmdiface \
-    wcnss_service \
-    prima_wlan.ko
+    wcnss_service
 
 # GPS
 PRODUCT_PACKAGES += \

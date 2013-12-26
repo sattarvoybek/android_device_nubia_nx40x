@@ -74,7 +74,6 @@ lib/libaudcal.so
 lib/libalsautils.so
 lib/libaudioalsa.so
 lib/libaudioparsers.so
-lib/libaudio-resampler
 lib/libadsprpc.so
 lib/libconfigdb.so
 lib/libc2d2_a3xx.so
@@ -203,7 +202,6 @@ lib/libsc-a2xx.so
 lib/libsc-a3xx.so
 lib/libsensor1.so
 lib/libulp2.so
-lib/libquipc_os_api.so
 lib/libTimeService.so
 lib/libtime_genoff.so
 lib/libthermalclient.so

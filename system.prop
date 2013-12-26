@@ -1,8 +1,6 @@
 #
 # system.prop for nx40x
 #
-#persist.fuse_sdcard=true
-
 drm.service.enabled=true
 ro.qc.sensors.wl_dis=true
 ro.qualcomm.bt.hci_transport=smd

@@ -254,6 +254,7 @@
         <item>0</item>
         <item>1</item>
         <item>5</item>
+        <item>7</item>
     </integer-array>
     
     <!-- Hardware 'face' keys present on the device, stored as a bit field.
@@ -266,12 +267,14 @@
            16 - App switch
         For example, a device with Home, Back and Menu keys would set this
         config to 7. -->
-    <integer name="config_deviceHardwareKeys">7</integer>
-    
-    <string-array name="config_locationProviderPackageNames" translatable="false">
-        <!-- The standard AOSP fused location provider -->
-        <item>com.android.location.fused</item>
-        <!-- The Google provider -->
-        <item>com.google.android.location</item>
-    </string-array>
+    <integer name="config_deviceHardwareKeys">7</integer>    
+
+    <bool name="config_enableWifiDisplay">true</bool>
+
+    <!-- Flag indicating if the speed up audio on mt call code should be executed -->
+    <bool name="config_speed_up_audio_on_mt_calls">true</bool>
+
+    <!-- Flag indicating if the speed up audio on mt call code should be executed -->
+    <bool name="config_speed_up_audio_on_mt_calls">true</bool>
+
 </resources>
