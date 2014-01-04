@@ -1,2 +1,2 @@
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/device_nx40x.mk
+    $(LOCAL_DIR)/device_NX501.mk

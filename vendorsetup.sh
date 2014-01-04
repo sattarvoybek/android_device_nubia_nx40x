@@ -14,5 +14,5 @@
 # limitations under the License.
 #
 
-add_lunch_combo cm_nx40x-userdebug
-add_lunch_combo cm_nx40x-user
+add_lunch_combo cm_NX501-userdebug
+add_lunch_combo cm_NX501-user

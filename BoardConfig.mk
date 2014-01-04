@@ -1,21 +1,21 @@
 USE_CAMERA_STUB := true
 
 # inherit from the proprietary version
--include vendor/nubia/nx40x/BoardConfigVendor.mk
+-include vendor/nubia/NX501/BoardConfigVendor.mk
 
 # Flags
 TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp -DQCOM_HARDWARE -DQCOM_BSP
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp -DQCOM_HARDWARE -DQCOM_BSP
 
-TARGET_SPECIFIC_HEADER_PATH := device/nubia/nx40x/include
+TARGET_SPECIFIC_HEADER_PATH := device/nubia/NX501/include
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_USES_QCOM_BSP := true
 
 # Kernel source
-TARGET_KERNEL_CONFIG := apq8064-nubiamini_defconfig
-TARGET_KERNEL_SOURCE := kernel/nubia/nx40x
+TARGET_KERNEL_CONFIG := Z5_defconfig
+TARGET_KERNEL_SOURCE := kernel/nubia/NX501
 
 # Architecture
 TARGET_ARCH := arm
@@ -37,15 +37,15 @@ TARGET_KRAIT_BIONIC_PLDSIZE := 64
 
 # Bootloader
 TARGET_NO_BOOTLOADER := true
-TARGET_BOOTLOADER_NAME := nx40x
-TARGET_BOOTLOADER_BOARD_NAME := nx40x
-TARGET_BOARD_INFO_FILE := device/nubia/nx40x/board-info.txt
+TARGET_BOOTLOADER_NAME := NX501
+TARGET_BOOTLOADER_BOARD_NAME := NX501
+TARGET_BOARD_INFO_FILE := device/nubia/NX501/board-info.txt
 
 # Others
 BOARD_USES_SECURE_SERVICES := true
-BOARD_LIB_DUMPSTATE := libdumpstate.nx40x
+BOARD_LIB_DUMPSTATE := libdumpstate.NX501
 TARGET_ADDITIONAL_BOOTCLASSPATH := qcmediaplayer:WfdCommon:qcom.fmradio
-BOARD_EGL_CFG := device/nubia/nx40x/configs/egl.cfg
+BOARD_EGL_CFG := device/nubia/NX501/configs/egl.cfg
 
 # Kernel 
 BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 maxcpus=4 androidboot.selinux=permissive
@@ -79,11 +79,10 @@ TARGET_USES_QCOM_COMPRESSED_AUDIO := true
 BOARD_USES_ALSA_AUDIO:= true
 BOARD_HAVE_LOW_LATENCY_AUDIO := true
 BOARD_USES_FLUENCE_INCALL := true
-# maxwen: this is actually only needed because
-# of a bug in audio-caf when BOARD_USES_FLUENCE_INCALL := true
-# to enter the default else path
 BOARD_USES_SEPERATED_AUDIO_INPUT := true
 BOARD_USES_SEPERATED_VOICE_SPEAKER := true
+BOARD_HAVE_NEW_QCOM_CSDCLIENT := true 
+BOARD_HAVE_CSD_FAST_CALL_SWITCH := true
 
 # Display
 TARGET_USES_ION := true
@@ -110,28 +109,28 @@ BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_DRIVER_FW_PATH_AP  := "ap"
-WIFI_DRIVER_MODULE_NAME := prima_wlan
+WIFI_DRIVER_MODULE_NAME := wlan
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/nubia/nx40x/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/nubia/NX501/bluetooth
 
 # RIL class
-BOARD_RIL_CLASS := ../../../device/nubia/nx40x/telephony-common/
+#BOARD_RIL_CLASS := ../../../device/nubia/NX501/telephony-common/
 
 #TARGET_NO_RECOVERY := true
 # CWM Recovery
-TARGET_RECOVERY_FSTAB := device/nubia/nx40x/rootdir/fstab.qcom
+TARGET_RECOVERY_FSTAB := device/nubia/NX501/rootdir/fstab.qcom
 RECOVERY_FSTAB_VERSION := 2
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BORAD_REC_LANG_CHINESE := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-TARGET_RECOVERY_INITRC := device/nubia/nx40x/recovery/init.rc
-BOARD_CUSTOM_GRAPHICS := ../../../device/nubia/nx40x/recovery/graphics.c
+TARGET_RECOVERY_INITRC := device/nubia/NX501/recovery/init.rc
+BOARD_CUSTOM_GRAPHICS := ../../../device/nubia/NX501/recovery/graphics.c
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
 
@@ -148,7 +147,7 @@ TWRP_EVENT_LOGGING := false
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 
 BOARD_SEPOLICY_DIRS += \
-    device/nubia/nx40x/sepolicy
+    device/nubia/NX501/sepolicy
 
 BOARD_SEPOLICY_UNION += \
     file_contexts \

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VENDOR=nubia
-DEVICE=nx40x
+DEVICE=NX501
 
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary
 rm -rf $BASE/*

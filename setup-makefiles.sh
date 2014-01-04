@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VENDOR=nubia
-DEVICE=nx40x
+DEVICE=NX501
 OUTDIR=vendor/$VENDOR/$DEVICE
 MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk
 
