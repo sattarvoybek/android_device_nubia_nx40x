@@ -17,6 +17,9 @@
 <!-- Phone app resources that may need to be customized
      for different hardware or product builds. -->
 <resources>
+    <!-- If this is true, the screen will fade off. -->
+    <bool name="config_animateScreenLights">false</bool>
+
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">false</bool>
     

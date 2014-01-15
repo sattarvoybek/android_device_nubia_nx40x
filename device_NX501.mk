@@ -8,16 +8,8 @@ DEVICE_PACKAGE_OVERLAYS += device/nubia/NX501/overlay
 
 LOCAL_PATH := device/nubia/NX501
 
-# HW
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/lib/hw/sensors.msm8960.so:system/lib/hw/sensors.msm8960.so \
-    $(LOCAL_PATH)/lib/hw/camera.msm8960.so:system/lib/hw/camera.msm8960.so \
-#    $(LOCAL_PATH)/lib/hw/gps.default.so:system/lib/hw/gps.default.so \
-#    $(LOCAL_PATH)/lib/hw/nfc.default.so:system/lib/hw/nfc.default.so \
-#    $(LOCAL_PATH)/lib/hw/sensors.msm8930.so:system/lib/hw/sensors.msm8930.so \
-#    $(LOCAL_PATH)/lib/hw/audio.a2dp.default.so:system/lib/hw/audio.a2dp.default.so \
-#    $(LOCAL_PATH)/lib/hw/audio.primary.msm8960.so:system/lib/hw/audio.primary.msm8960.so \
-#    $(LOCAL_PATH)/lib/hw/audio.r_submix.default.so:system/lib/hw/audio.r_submix.default.so
+#PRODUCT_COPY_FILES += \
+#    $(TOP)/vendor/nubia/NX501/proprietary/lib/libtime_genoff.so:$(TARGET_OUT)/obj/lib/libtime_genoff.so
 
 # Snd_soc_msm
 PRODUCT_COPY_FILES += \
@@ -67,6 +59,16 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
 	$(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:/system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
 
+# GPS Location
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gps/dbus.conf:system/etc/dbus.conf \
+    $(LOCAL_PATH)/gps/izat.conf:system/etc/izat.conf \
+    $(LOCAL_PATH)/gps/lowi.conf:system/etc/lowi.conf \
+    $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/gps/quipc.conf:system/etc/quipc.conf \
+    $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf \
+    $(LOCAL_PATH)/gps/xtwifi.conf:system/etc/xtwifi.conf
+
 # Thermald
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/thermald/thermald.conf:system/etc/thermald.conf \
@@ -75,6 +77,7 @@ PRODUCT_COPY_FILES += \
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
@@ -88,11 +91,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+    frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
-    $(LOCAL_PATH)/configs/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    $(LOCAL_PATH)/configs/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
-    $(LOCAL_PATH)/configs/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
-    $(LOCAL_PATH)/configs/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
+    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
 
 # Specific keys
 PRODUCT_COPY_FILES += \
@@ -131,7 +134,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/ueventd.qcom.rc:root/ueventd.qcom.rc
 
 # gps/location secuity configuration file
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/sec_config:system/etc/sec_config
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/sec_config:system/etc/sec_config
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -152,8 +156,6 @@ PRODUCT_PACKAGES += \
 #dalvik
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-PRODUCT_PACKAGES += libnetcmdiface
-
 # Misc Packages
 PRODUCT_PACKAGES += \
     DeviceSettings \
@@ -170,20 +172,12 @@ PRODUCT_PACKAGES += \
     hci_qcomm_init \
     bluetoothd
 
-PRODUCT_PACKAGES += \
-    bdAddrLoader \
-    libwfcu \
-    conn_init \
-    libnetcmdiface \
-    wcnss_service
-
 # GPS
 PRODUCT_PACKAGES += \
     libloc_adapter \
     libloc_eng \
     libloc_api_v02 \
-    libgps.utils \
-    gps.msm8960
+    libgps.utils
 
 # Display
 PRODUCT_PACKAGES += \
@@ -212,9 +206,6 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     libstagefrighthw
 
-# Power
-PRODUCT_PACKAGES += power.qcom
-
 # HDMI
 PRODUCT_PACKAGES += \
     hdmid
@@ -238,9 +229,7 @@ PRODUCT_PACKAGES += \
     libnfc \
     libnfc_jni \
     Nfc \
-    Tag \
-    com.android.nfc_extras \
-    PhaseBeam
+    Tag
 
 # common build.props
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -252,11 +241,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-qmi-1.so \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15 \
-    ro.opengles.version=196608 \
+    ro.opengles.version=131072 \
     ro.sf.lcd_density=480 \
     ro.product.locale.language=zh \
     ro.product.locale.region=CN \
-    persist.sys.timezone=Asia/Shanghai
+    persist.sys.timezone=Asia/Shanghai \
+    persist.radio.tdscdma_present=2
 
 $(call inherit-product, build/target/product/full.mk)
 

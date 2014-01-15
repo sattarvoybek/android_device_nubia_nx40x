@@ -12,7 +12,7 @@ bin/fmconfig
 bin/fm_qsoc_patches
 bin/ftmdaemon
 bin/gpsone_daemon
-#bin/gsiff_daemon
+bin/gsiff_daemon
 bin/hci_qcomm_init
 bin/irsc_util
 bin/ks
@@ -22,7 +22,7 @@ bin/mpdecision
 bin/netmgrd
 bin/nl_listener
 bin/port-bridge
-#bin/ptt_socket_app
+bin/ptt_socket_app
 bin/qcks
 bin/qmiproxy
 bin/qmuxd
@@ -30,7 +30,7 @@ bin/qseecomd
 bin/qrngd
 bin/rild
 bin/rmt_storage
-#bin/sensors.qcom
+bin/sensors.qcom
 bin/thermald
 bin/thermal-engine
 bin/time_daemon
@@ -38,18 +38,16 @@ bin/usbhub
 bin/usbhub_init
 bin/usf_epos
 bin/usf_tester
-#bin/vold
 
 etc/firmware/a225_pfp.fw
 etc/firmware/a225_pm4.fw
 etc/firmware/a225p5_pm4.fw
 etc/firmware/a300_pfp.fw
 etc/firmware/a300_pm4.fw
-#etc/firmware/cyttsp_8064_mtp.hex
-#etc/firmware/cyttsp_8960_cdp.hex
+etc/firmware/cyttsp_8064_mtp.hex
+etc/firmware/cyttsp_8960_cdp.hex
 etc/firmware/leia_pfp_470.fw
 etc/firmware/leia_pm4_470.fw
-#etc/firmware/PR1479246-S3202_SYNAPTICS.img
 etc/firmware/vidc.b00
 etc/firmware/vidc.b01
 etc/firmware/vidc.b02
@@ -127,6 +125,7 @@ lib/libcnefeatureconfig.so
 lib/libcneqmiutils.so
 lib/libcneutils.so
 lib/libCommandSvc.so
+lib/libdiag.so
 lib/libCameraEffect.so
 lib/libdrmdecrypt.so
 lib/libdrmfs.so
@@ -139,7 +138,7 @@ lib/libgemini.so
 lib/libgps.utils.so
 lib/libgsl.so
 lib/libidl.so
-lib/libhardware.so
+#lib/libhardware.so
 lib/libimage-jpeg-enc-omx-comp.so
 lib/libimage-omx-common.so
 lib/libllvm-a3xx.so
@@ -207,10 +206,15 @@ lib/libthermalclient.so
 lib/libxml.so
 lib/qnet-plugin.so
 
-#vendor/firmware/libpn544_fw.so
+lib/hw/camera.msm8960.so
+lib/hw/gps.default.so
+lib/hw/nfc.default.so
+lib/hw/power.default.so
+lib/hw/sensors.has_gyro.so
+
+vendor/firmware/libpn544_fw.so
 
 vendor/lib/libwvdrm_L3.so
 vendor/lib/libwvm.so
 vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/drm/libdrmwvmplugin.so
-vendor/lib/libdiag.so
