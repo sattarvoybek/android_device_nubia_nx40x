@@ -26,22 +26,29 @@
 #
 
 import init.qcom.usb.rc
+import init.ril.rc
 import init.target.rc
 
 on early-init
     mkdir /mnt 0775 root system
     # Create mountpoint so Dalvik can mark as slave in zygotes.
     mount tmpfs tmpfs /data/qcks size=20m,mode=0750,gid=1000
-	
+
 on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /storage 0775 system system
-    mkdir /storage/sdcard0 0775 system system
-    mkdir /storage/sdcard1 0775 system system
-    mkdir /storage/usbdisk 0775 system system
+    chmod 0644 /proc/cmdline
 
+    # External storage directories
+    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
+
+    mkdir /storage/sdcard0 0000 system system
+    mkdir /storage/sdcard1 0000 system system
+    mkdir /storage/usbdisk 0000 system system
+
+    # Support legacy paths
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
     symlink /storage/sdcard1 /external_sd
@@ -51,6 +58,11 @@ on init
 
     export EXTERNAL_STORAGE /storage/sdcard0
     export SECONDARY_STORAGE /storage/sdcard1
+
+# create USB host bus directory here so that libusbhost
+# can start monitoring.
+    mkdir /dev/bus 0755 root root
+    mkdir /dev/bus/usb 0755 root root
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -86,8 +98,6 @@ on boot
     chmod 2770 /dev/socket/qmux_bluetooth
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
-    
-    chown system system /sys/bus/ttsp4/devices/cyttsp4_loader.main_ttsp_core/manual_cali
 
     #Start rmnet_usb driver
     write /sys/module/rmnet_usb/parameters/rmnet_data_init 1
@@ -117,9 +127,14 @@ on boot
     chmod 0664 /sys/devices/virtual/graphics/fb1/hpd
     chmod 0664 /sys/devices/virtual/graphics/fb1/video_mode
     chmod 0664 /sys/devices/virtual/graphics/fb1/format_3d
+    chmod 0664 /sys/devices/virtual/graphics/fb1/vendor_name
+    chmod 0664 /sys/devices/virtual/graphics/fb1/product_description
 
     # Change owner and group for media server and surface flinger
     chown system system /sys/devices/virtual/graphics/fb1/format_3d
+    chown system system /sys/devices/virtual/graphics/fb1/hpd
+    chown system system /sys/devices/virtual/graphics/fb1/vendor_name
+    chown system system /sys/devices/virtual/graphics/fb1/product_description
 
     # Change permissions for fps_level nodes
     chown system graphics /sys/class/graphics/fb0/msm_fb_fps_level
@@ -131,6 +146,17 @@ on boot
 
     #For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
+
+    chmod 660 /dev/rtc0
+    chown system system /dev/rtc0
+
+    chown root system /proc/net/ip_conntrack
+
+    # WTF
+    chmod 666 /proc/cmdline
+
+    # Enable DEBUG_SUSPEND, DEBUG_EXIT_SUSPEND, and DEBUG_WAKEUP
+    write /sys/module/wakelock/parameters/debug_mask 7
 
     #To allow interfaces to get v6 address when tethering is enabled
     write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2
@@ -153,10 +179,10 @@ on boot
     write /proc/sys/net/ipv6/conf/rmnet_usb1/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb2/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb3/accept_ra 2
-	
-    # Don't disable dmesg access for apps
-    write /proc/sys/kernel/dmesg_restrict 0
 
+    write /sys/module/subsystem_restart/parameters/restart_level 3
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
+    write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 1
     # To prevent out of order acknowledgements from making
     # connection tracking to treat them as not belonging to
     # the connection they belong to.
@@ -172,7 +198,7 @@ on post-fs
 # msm specific files that need to be created on /data
 on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/media 0770 media_rw media_rw
+    mkdir /data/media 0775 media_rw media_rw
     chown media_rw media_rw /data/media
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
@@ -182,14 +208,12 @@ on post-fs-data
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
-    chown dhcp dhcp /data/misc/dhcp
+    # to observe dnsmasq.leases file for dhcp information of soft ap.
+    chown dhcp system /data/misc/dhcp
 
-    # Create the directories used by CnE subsystem
-    mkdir /data/connectivity 0771 system system
-    chown system system /data/connectivity
-
-    mkdir /data/connectivity/nsrm 0771 system system
-    chown system system /data/connectivity/nsrm
+    write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 1
+    write /sys/devices/platform/wcnss_wlan.0/serial_number ${ro.serialno}
+    write /dev/wcnss_wlan 1
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
@@ -209,13 +233,11 @@ on post-fs-data
     chown system system /sys/devices/platform/msm_sdcc.3/polling
     chown system system /sys/devices/platform/msm_sdcc.4/polling
 
+    chown system system /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/pwrscale/policy
+
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
     #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
-
-    #Create directories for wiper services
-    mkdir /data/wpstiles/ 0755 shell
-    mkdir /data/wiper 0755 gps qcom_oncrpc
 
     #Create directories for gpsone_daemon services
     mkdir /data/misc/gpsone_d 0770 system gps
@@ -292,6 +314,10 @@ service qcom-c_main-sh /system/bin/sh /init.qcom.class_main.sh
 on property:vold.decrypt=trigger_restart_framework
     start qcom-c_main-sh
     start config_bluetooth
+
+service cnd /system/bin/cnd
+    class late_start
+    socket cnd stream 660 root inet
 
 service irsc_util /system/bin/logwrapper /system/bin/irsc_util "/etc/sec_config"
     class main
@@ -416,9 +442,12 @@ service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
     oneshot
 
 service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
-    -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -N \
-    -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -dddd \
-    -e/data/misc/wifi/entropy.bin -puse_p2p_group_interface=1
+    -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
+    -I/system/etc/wifi/p2p_supplicant_overlay.conf -N \
+    -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
+    -I/system/etc/wifi/wpa_supplicant_overlay.conf \
+    -O/data/misc/wifi/sockets -puse_p2p_group_interface=1 -dddd \
+    -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
     #   user wifi
@@ -428,9 +457,11 @@ service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
-    -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -dddd \
-    -e/data/misc/wifi/entropy.bin
+service wpa_supplicant /system/bin/wpa_supplicant \
+    -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
+    -I/system/etc/wifi/wpa_supplicant_overlay.conf \
+    -O/data/misc/wifi/sockets -dddd \
+    -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
     #   user wifi
@@ -460,16 +491,6 @@ service iprenew_p2p /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
-    class late_start
-    disabled
-    oneshot
-
-service iprenew_bt-pan /system/bin/dhcpcd -n
-    class late_start
-    disabled
-    oneshot
-
 service dhcpcd_bnep0 /system/bin/dhcpcd -BKLG
     disabled
     oneshot
@@ -488,6 +509,12 @@ service dhcpcd_bnep3 /system/bin/dhcpcd -BKLG
 
 service dhcpcd_bnep4 /system/bin/dhcpcd -BKLG
     disabled
+    oneshot
+
+service wiperiface /system/bin/wiperiface
+    class late_start
+    user gps
+    group gps qcom_oncrpc net_raw
     oneshot
 
 service gpsone_daemon /system/bin/gpsone_daemon
@@ -650,6 +677,18 @@ service profiler_daemon /system/bin/profiler_daemon
     group root
     disabled
 
+service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
+    class late_start
+    disabled
+
+service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
+    class late_start
+    disabled
+
+service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
+    class late_start
+    disabled
+
 service hcidump /system/bin/sh /system/etc/hcidump.sh
     user bluetooth
     group bluetooth system net_bt_admin net_admin
@@ -670,18 +709,9 @@ on property:persist.sys.mdm.timeout_disable=1
 # Limit to SoC reset (1) and independent SSR (3)
 on property:persist.sys.ssr.restart_level=1
     write /sys/module/subsystem_restart/parameters/restart_level 1
-#    write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 0	//add by liuyongfeng
-
 on property:persist.sys.ssr.restart_level=3
     write /sys/module/subsystem_restart/parameters/restart_level 3
-#    write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 1	//add by liuyongfeng
 
-#on property:persist.sys.ap.restart_level=0
-#    write /sys/module/restart/parameters/download_mode 0
-
-#on property:persist.sys.ap.restart_level=1
-#    write /sys/module/restart/parameters/download_mode 1
-    
 on property:persist.radio.sglte_sim_active=true
     kill qmiproxy 15
 on property:persist.radio.sglte_sim_active=false
@@ -704,20 +734,3 @@ service diag_mdlog_stop /system/bin/diag_mdlog -k
     group system qcom_diag sdcard_rw sdcard_r media_rw
     disabled
     oneshot
-    
-# start the compass servie
-service akmd /system/bin/akmd8963 -o 1
-	class main
-	oneshot
-# ZTEMT ADD by zhubing END
-
-#ZTEMT ADD by zhangxinghua 2012-11-29 for image enhance
-on property:persist.sys.image.enhance=w
-    write /sys/kernel/lcd_intensity/intensity 24
-	
-on property:persist.sys.image.enhance=n
-    write /sys/kernel/lcd_intensity/intensity 25
-	
-on property:persist.sys.image.enhance=i
-    write /sys/kernel/lcd_intensity/intensity 26	
-#ZTEMT END

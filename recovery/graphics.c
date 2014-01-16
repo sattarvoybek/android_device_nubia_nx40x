@@ -29,7 +29,12 @@
 
 #include <pixelflinger/pixelflinger.h>
 
+#ifdef BOARD_USE_CUSTOM_RECOVERY_FONT
+#include BOARD_USE_CUSTOM_RECOVERY_FONT
+#else
 #include "font_10x18.h"
+#endif
+
 #include "minui.h"
 #include <cutils/memory.h>
 
@@ -193,7 +198,13 @@ int gr_measure(const char *s)
     return gr_font->cwidth * strlen(s);
 }
 
-int gr_text(int x, int y, const char *s)
+void gr_font_size(int *x, int *y)
+{
+    *x = gr_font->cwidth;
+    *y = gr_font->cheight;
+}
+
+int gr_text(int x, int y, const char *s, ...)
 {
     GGLContext *gl = gr_context;
     GRFont *font = gr_font;
@@ -345,6 +356,15 @@ int gr_fb_width(void)
 int gr_fb_height(void)
 {
     return gr_framebuffer[0].height;
+}
+
+void gr_fb_blank(bool blank)
+{
+    int ret;
+
+    ret = ioctl(gr_fb_fd, FBIOBLANK, blank ? FB_BLANK_POWERDOWN : FB_BLANK_UNBLANK);
+    if (ret < 0)
+        perror("ioctl(): blank");
 }
 
 gr_pixel *gr_fb_data(void)

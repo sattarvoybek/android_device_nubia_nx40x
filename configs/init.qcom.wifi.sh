@@ -44,36 +44,43 @@ btsoc=""
 PATH=/sbin:/system/sbin:/system/bin:/system/xbin
 export PATH
 
-# Trigger WCNSS platform driver
-trigger_wcnss()
+# Load wifi kernel module
+load_wifiKM()
 {
-    # We need to trigger WCNSS platform driver, WCNSS driver
-    # will export a file which we must touch so that the
-    # driver knows that userspace is ready to handle firmware
-    # download requests.
-
-    # See if an appropriately named device file is present
-    wcnssnode=`ls /dev/wcnss*`
-    case "$wcnssnode" in
+    # We need to make sure the WCNSS platform driver is running.
+    # The WCNSS platform driver can either be built as a loadable
+    # module or it can be built-in to the kernel.  If it is built
+    # as a loadable module it can have one of several names.  So
+    # look to see if an appropriately named kernel module is
+    # present
+    wcnssmod=`ls /system/lib/modules/wcnss*.ko` 2> /dev/null
+    case "$wcnssmod" in
         *wcnss*)
-            # Before triggering wcnss, let it know that
-            # caldata is available at userspace.
-            if [ -e /data/misc/wifi/WCNSS_qcom_wlan_cal.bin ]; then
-                calparm=`ls /sys/module/wcnsscore/parameters/has_calibrated_data`
-                if [ -e $calparm ] && [ ! -e /data/misc/wifi/WCN_FACTORY ]; then
-                    echo 1 > $calparm
-                fi
-            fi
-            # There is a device file.  Write to the file
-            # so that the driver knows userspace is
-            # available for firmware download requests
-            echo 1 > $wcnssnode
+            # A kernel module is present, so load it
+            insmod $wcnssmod
             ;;
-
         *)
-            # There is not a device file present, so
-            # the driver must not be available
-            echo "No WCNSS device node detected"
+            # A kernel module is not present so we assume the
+            # driver is built-in to the kernel.  If that is the
+            # case then the driver will export a file which we
+            # must touch so that the driver knows that userspace
+            # is ready to handle firmware download requests.  See
+            # if an appropriately named device file is present
+            wcnssnode=`ls /dev/wcnss*`
+            case "$wcnssnode" in
+                *wcnss*)
+                    # There is a device file.  Write to the file
+                    # so that the driver knows userspace is
+                    # available for firmware download requests
+                    echo 1 > $wcnssnode
+                    ;;
+                *)
+                    # There is not a kernel module present and
+                    # there is not a device file present, so
+                    # the driver must not be available
+                    echo "No WCNSS module or device node detected"
+                    ;;
+            esac
             ;;
     esac
 
@@ -100,8 +107,8 @@ case "$target" in
       # the wifi driver config file
       setprop wlan.driver.config /data/misc/wifi/WCNSS_qcom_cfg.ini
 
-      # Trigger WCNSS platform driver
-      trigger_wcnss &
+      # Load kernel module in a separate process
+      load_wifiKM &
       ;;
 
     msm8960*)
@@ -210,9 +217,9 @@ case "$target" in
         echo "*** WI-FI chip ID is not specified in /persist/wlan_chip_id **"
         echo "*** Use the default WCN driver.                             **"
         setprop wlan.driver.ath 0 
-        #rm  /system/lib/modules/wlan.ko
-        #ln -s /system/lib/modules/prima/prima_wlan.ko /system/lib/modules/wlan.ko
-        #ln -s /system/lib/modules/prima/cfg80211.ko /system/lib/modules/cfg80211.ko
+        rm  /system/lib/modules/wlan.ko
+        ln -s /system/lib/modules/prima/prima_wlan.ko /system/lib/modules/wlan.ko
+        ln -s /system/lib/modules/prima/cfg80211.ko /system/lib/modules/cfg80211.ko
         # Populate the writable driver configuration file
         if [ ! -e /data/misc/wifi/WCNSS_qcom_cfg.ini ]; then
             if [ -f /persist/WCNSS_qcom_cfg.ini ]; then
@@ -220,16 +227,16 @@ case "$target" in
             else
                 cp /system/etc/wifi/WCNSS_qcom_cfg.ini /data/misc/wifi/WCNSS_qcom_cfg.ini
             fi
-            chown -h system:wifi /data/misc/wifi/WCNSS_qcom_cfg.ini
-            chmod -h 660 /data/misc/wifi/WCNSS_qcom_cfg.ini
+            chown system:wifi /data/misc/wifi/WCNSS_qcom_cfg.ini
+            chmod 660 /data/misc/wifi/WCNSS_qcom_cfg.ini
         fi
 
         # The property below is used in Qcom SDK for softap to determine
         # the wifi driver config file
         setprop wlan.driver.config /data/misc/wifi/WCNSS_qcom_cfg.ini
 
-        # Trigger WCNSS platform driver
-        trigger_wcnss &
+        # Load kernel module in a separate process
+        load_wifiKM &
         ;;
       esac
       ;;
@@ -282,4 +289,3 @@ esac
 
 # Run audio init script
 /system/bin/sh /system/etc/init.qcom.audio.sh "$target" "$btsoc"
-
