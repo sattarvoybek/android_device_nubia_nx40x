@@ -23,11 +23,12 @@ on init
 
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 19D2
-    write /sys/class/android_usb/android0/idProduct FFC5
+    write /sys/class/android_usb/android0/idProduct FFCD
     write /sys/class/android_usb/android0/functions adb
     write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
     write /sys/class/android_usb/android0/iProduct ${ro.product.model}
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
+    write /sys/class/leds/lcd-backlight/max_brightness 255
 
 
 on boot

@@ -128,18 +128,16 @@ BOARD_HAS_NO_SELECT_BUTTON      := true
 BOARD_HAS_LARGE_FILESYSTEM      := true
 BORAD_REC_LANG_CHINESE          := true
 TARGET_RECOVERY_PIXEL_FORMAT    := "RGBX_8888"
-TARGET_RECOVERY_INITRC         := device/nubia/NX501/recovery/init.rc
+TARGET_RECOVERY_INITRC          := ../../../device/nubia/NX501/recovery/init.rc
 BOARD_CUSTOM_GRAPHICS           := ../../../device/nubia/NX501/recovery/graphics.c
-BOARD_USE_CUSTOM_RECOVERY_FONT  := \"roboto_15x24.h\"
+BOARD_USE_CUSTOM_RECOVERY_FONT  := \"roboto_23x41.h\"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
 
 # TWRP Recovery
-DEVICE_RESOLUTION                := 720x1280
+DEVICE_RESOLUTION                := 1080x1920
 #RECOVERY_SDCARD_ON_DATA         := true
 TW_INTERNAL_STORAGE_PATH         := "/sdcard"
 TW_INTERNAL_STORAGE_MOUNT_POINT  := "sdcard"
-TW_EXTERNAL_STORAGE_PATH         := "/external_sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT  := "external_sd"
 TW_NO_REBOOT_BOOTLOADER          := true
 TW_HAS_DOWNLOAD_MODE             := false
 TWRP_EVENT_LOGGING               := false
@@ -151,6 +149,9 @@ USE_DEVICE_SPECIFIC_CAMERA           := true
 USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY := true
 
 HAVE_ADRENO_SOURCE:= false
+
+# Compatibility with pre-kitkat Qualcomm sensor HALs
+SENSORS_NEED_SETRATE_ON_ENABLE := true
 
 # Board specific SELinux policy variable definitions
 BOARD_SEPOLICY_DIRS := \

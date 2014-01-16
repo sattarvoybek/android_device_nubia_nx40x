@@ -734,3 +734,8 @@ service diag_mdlog_stop /system/bin/diag_mdlog -k
     group system qcom_diag sdcard_rw sdcard_r media_rw
     disabled
     oneshot
+    
+# start the compass servie
+service akmd /system/bin/akmd8963 -o 1
+	class main
+	oneshot

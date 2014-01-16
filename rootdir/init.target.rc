@@ -35,6 +35,36 @@ on early-init
 #on init
        # This is no longer supported from KK release.
        #export BOOTCLASSPATH ${BOOTCLASSPATH}:/system/framework/WfdCommon.jar:/system/framework/qcmediaplayer.jar
+# modify the sensor persist of file ops
+    # compass
+    chown system system /sys/class/compass/akm8963/enable_acc
+    chown system system /sys/class/compass/akm8963/enable_mag
+    chown system system /sys/class/compass/akm8963/enable_ori
+    chown system system /sys/class/compass/akm8963/delay_acc
+    chown system system /sys/class/compass/akm8963/delay_mag
+    chown system system /sys/class/compass/akm8963/delay_ori
+    chown system system /sys/class/compass/akm8963/accel    
+
+	#g-sensor
+    chown system system /sys/class/i2c-adapter/i2c-2/2-0018/enable_device
+    chown system system /sys/class/i2c-adapter/i2c-2/2-0018/pollrate_ms 
+    
+	#gyro
+    chown system system /sys/class/i2c-adapter/i2c-2/2-006a/enable_device
+    chown system system /sys/class/i2c-adapter/i2c-2/2-006a/pollrate_ms 
+
+    #pressure
+    chown system system /sys/class/i2c-adapter/i2c-2/2-005c/enable_device
+    chown system system /sys/class/i2c-adapter/i2c-2/2-005c/pollrate_ms
+    chown system system /sys/class/i2c-adapter/i2c-2/2-005c/compensation_param
+# ZTEMT ADD by chengdongsheng for vibrator muti-effect
+	chown system system /sys/class/i2c-adapter/i2c-0/0-005a/vibrator_set_mode
+	chown system system /sys/class/i2c-adapter/i2c-0/0-005a/vibrator_set_rtp_strength
+# ZTEMT end by chengdongsheng
+    #ZTEMT ADD for usb-modem rate 2013.03
+    chown radio radio /sys/devices/virtual/android_usb/android0/RF_MODE
+    chmod 0660 /sys/devices/virtual/android_usb/android0/RF_MODE
+    #ZTEMT end
 on fs
     mount_all fstab.qcom
 

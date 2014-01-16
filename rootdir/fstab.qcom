@@ -15,12 +15,12 @@
 /dev/block/platform/msm_sdcc.1/by-name/recovery       /recovery    emmc    defaults                                    defaults
 /dev/block/platform/msm_sdcc.1/by-name/misc           /misc        emmc    defaults                                    defaults
 /dev/block/platform/msm_sdcc.1/by-name/customfs       /custom      ext4    rw,nosuid,nodev,relatime,data=ordered       defaults
+/dev/block/platform/msm_sdcc.1/by-name/modem          /radio       emmc    defaults                                    defaults
 /dev/block/platform/msm_sdcc.1/by-name/sbl1           /sbl1        emmc    defaults                                    defaults
 /dev/block/platform/msm_sdcc.1/by-name/sbl2           /sbl2        emmc    defaults                                    defaults
 /dev/block/platform/msm_sdcc.1/by-name/sbl3           /sbl3        emmc    defaults                                    defaults
 /dev/block/platform/msm_sdcc.1/by-name/tz             /tz          emmc    defaults                                    defaults
 /dev/block/platform/msm_sdcc.1/by-name/rpm            /rpm         emmc    defaults                                    defaults
 /dev/block/platform/msm_sdcc.1/by-name/aboot          /aboot       emmc    defaults                                    defaults
-/devices/platform/msm_sdcc.1/mmc_host                 auto         vfat    defaults                                    voldmanaged=sdcard0:25,nonremovable,noemulatedsd
-/devices/platform/msm_sdcc.3/mmc_host                 auto         auto    defaults                                    voldmanaged=sdcard1:auto,noemulatedsd
-/devices/platform/msm_hsusb_host                      auto         auto    defaults                                    voldmanaged=usbdisk:auto
+/devices/platform/msm_sdcc.1/mmc_host          /storage/sdcard0    vfat    defaults                                    voldmanaged=sdcard0:25,nonremovable,noemulatedsd
+/devices/platform/msm_hsusb_host               /storage/usbdisk    auto    defaults                                    voldmanaged=usbdisk:auto

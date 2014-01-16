@@ -4,8 +4,8 @@ DEVICE_PACKAGE_OVERLAYS += device/nubia/NX501/overlay
 # currently contain all of the bitmaps at xhdpi density so
 # we do this little trick to fall back to the hdpi version
 # if the xhdpi doesn't exist.
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
-PRODUCT_AAPT_PREF_CONFIG := xhdpi
+PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 LOCAL_PATH := device/nubia/NX501
 
@@ -276,7 +276,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072 \
-    ro.sf.lcd_density=320
+    ro.sf.lcd_density=480
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.locale.language=zh \
@@ -293,7 +293,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := NX501,nx401,nx402,NX501,NX401,NX402
+TARGET_OTA_ASSERT_DEVICE := NX501,nx501
 
 # call dalvik heap config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
