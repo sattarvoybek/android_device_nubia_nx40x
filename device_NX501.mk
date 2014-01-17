@@ -8,8 +8,15 @@ DEVICE_PACKAGE_OVERLAYS += device/nubia/NX501/overlay
 
 LOCAL_PATH := device/nubia/NX501
 
-#PRODUCT_COPY_FILES += \
-#    $(TOP)/vendor/nubia/NX501/proprietary/lib/libtime_genoff.so:$(TARGET_OUT)/obj/lib/libtime_genoff.so
+PRODUCT_CHARACTERISTICS := nosdcard
+
+# HW
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/lib/hw/sensors.has_gyro.so:system/lib/hw/sensors.has_gyro.so \
+    $(LOCAL_PATH)/lib/hw/camera.msm8960.so:system/lib/hw/camera.msm8960.so \
+    $(LOCAL_PATH)/lib/hw/gps.default.so:system/lib/hw/gps.default.so \
+    $(LOCAL_PATH)/lib/hw/nfc.default.so:system/lib/hw/nfc.default.so \
+    $(LOCAL_PATH)/lib/hw/sensors.msm8930.so:system/lib/hw/sensors.msm8930.so
 
 # Snd_soc_msm
 PRODUCT_COPY_FILES += \
@@ -31,8 +38,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
     $(LOCAL_PATH)/configs/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
     $(LOCAL_PATH)/configs/init.qcom.sensor.sh:system/etc/init.qcom.sensor.sh \
-    $(LOCAL_PATH)/configs/init.qcom.btdun.sh:system/etc/init.qcom.btdun.sh \
-    $(LOCAL_PATH)/configs/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
     $(LOCAL_PATH)/configs/nfcee_access.xml:system/etc/nfcee_access.xml \
@@ -41,23 +46,20 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/hcidump.sh:system/etc/hcidump.sh \
     $(LOCAL_PATH)/configs/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
     $(LOCAL_PATH)/configs/init.crda.sh:system/etc/init.crda.sh \
-    $(LOCAL_PATH)/configs/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
     $(LOCAL_PATH)/configs/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
     $(LOCAL_PATH)/configs/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
     $(LOCAL_PATH)/configs/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
+    $(LOCAL_PATH)/configs/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
+    $(LOCAL_PATH)/configs/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
     $(LOCAL_PATH)/configs/usf_post_boot.sh:system/etc/usf_post_boot.sh
 
 # WIFI
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    $(LOCAL_PATH)/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \
-    $(LOCAL_PATH)/wifi/hostapd.conf:system/etc/hostapd/hostapd.conf \
-    $(LOCAL_PATH)/wifi/hostapd.deny:system/etc/hostapd/hostapd.deny \
-
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/vendor/firmware/wlan/prima/WCNSS_cfg.dat \
-	$(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
-	$(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:/system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
+    $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
+    $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 
 # GPS Location
 PRODUCT_COPY_FILES += \
@@ -93,9 +95,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
-    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
+    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
 
 # Specific keys
 PRODUCT_COPY_FILES += \
@@ -109,17 +111,14 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keys/samsung_remote_ir.kl:system/usr/keylayout/samsung_remote_ir.kl \
     $(LOCAL_PATH)/keys/ue_rf4ce_remote.kl:system/usr/keylayout/ue_rf4ce_remote.kl \
     $(LOCAL_PATH)/keys/Generic.kl:system/usr/keylayout/Generic.kl \
-    $(LOCAL_PATH)/keys/cyttsp4_mt.idc:system/usr/idc/cyttsp4_mt.idc \
     $(LOCAL_PATH)/keys/pmic8xxx_pwrkey.kcm:system/usr/keychars/pmic8xxx_pwrkey.kcm \
     $(LOCAL_PATH)/keys/pmic8xxx_pwrkey.kl:system/usr/keylayout/pmic8xxx_pwrkey.kl \
+    $(LOCAL_PATH)/keys/cyttsp4_mt.idc:system/usr/idc/cyttsp4_mt.idc \
     $(LOCAL_PATH)/keys/zte_cap_touchscreen.idc:system/usr/idc/touch_dev.idc
 
 # rootdir
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/fstab.qcom:root/fstab.qcom \
-    $(LOCAL_PATH)/rootdir/init.nubia.ums.sh:root/init.nubia.ums.sh \
-    $(LOCAL_PATH)/rootdir/init.nubia.ums_adb.sh:root/init.nubia.ums_adb.sh \
-    $(LOCAL_PATH)/rootdir/init.nubia.usb.rc:root/init.nubia.usb.rc \
     $(LOCAL_PATH)/rootdir/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
     $(LOCAL_PATH)/rootdir/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
     $(LOCAL_PATH)/rootdir/init.qcom.early_boot.sh:root/init.qcom.early_boot.sh \
@@ -139,11 +138,11 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_PACKAGES += \
+    alsa.msm8960 \
     audio.a2dp.default \
     audio.primary.msm8960 \
-    audio.r_submix.default \
-    alsa.msm8960 \
     audio_policy.msm8960 \
+    audio.r_submix.default \
     audio.usb.default \
     libalsa-intf \
     libmm-audio-resampler \
@@ -155,6 +154,8 @@ PRODUCT_PACKAGES += \
 
 #dalvik
 PRODUCT_TAGS += dalvik.gc.type-precise
+
+PRODUCT_PACKAGES += libnetcmdiface
 
 # Misc Packages
 PRODUCT_PACKAGES += \
@@ -229,7 +230,8 @@ PRODUCT_PACKAGES += \
     libnfc \
     libnfc_jni \
     Nfc \
-    Tag
+    Tag \
+    PhaseBeam
 
 # common build.props
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -241,7 +243,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-qmi-1.so \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15 \
-    ro.opengles.version=131072 \
+    ro.opengles.version=196608 \
     ro.sf.lcd_density=480 \
     ro.product.locale.language=zh \
     ro.product.locale.region=CN \
@@ -255,13 +257,13 @@ PRODUCT_NAME := full_NX501
 PRODUCT_DEVICE := NX501
 
 # Device uses high-density artwork where available
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
-PRODUCT_AAPT_PREF_CONFIG := xhdpi
+PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := NX501
+TARGET_OTA_ASSERT_DEVICE := nx501,NX501
 
 # call dalvik heap config
-$(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 # call hwui memory config
-$(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-hwui-memory.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)

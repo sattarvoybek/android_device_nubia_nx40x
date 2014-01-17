@@ -46,9 +46,10 @@ start_sensors()
         if [ ! -s /data/system/sensors/settings ]; then
             # If the settings file is empty, enable sensors HAL
             # Otherwise leave the file with it's current contents
-            echo 1 > /data/system/sensors/settings
+        # disable the DSPS
+            # echo 1 > /data/system/sensors/settings    
         fi
-        start sensors
+        # start sensors
     fi
 }
 

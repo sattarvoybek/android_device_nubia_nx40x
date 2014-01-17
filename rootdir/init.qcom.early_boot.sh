@@ -79,9 +79,6 @@ case "$1" in
                 ;;
             *)
                 case "$soc_hwid" in
-                    "142") #8x30 QRD
-                        setprop ro.sf.lcd_density 320
-                        ;;
                     "109")
                         setprop ro.sf.lcd_density 160
                         ;;
@@ -142,8 +139,3 @@ do
     esac
     fb_cnt=$(( $fb_cnt + 1))
 done
-
-# Set date to a time after 2008
-# This is a workaround for Zygote to preload time related classes properly
-date -s 20090102.130000
-

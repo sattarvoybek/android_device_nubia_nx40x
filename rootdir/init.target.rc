@@ -95,20 +95,14 @@ on boot
    write /sys/devices/i2c-3/3-005b/update_fw 1
    start qcamerasvr
 
-service wcnss-service /system/bin/wcnss_service
-    class late_start
-    user system
-    group system wifi
-    oneshot
-
 on post-fs-data
    mkdir /data/tombstones 0771 system system
-#   mkdir /tombstones/modem 0771 system system
-#   mkdir /tombstones/lpass 0771 system system
-#   mkdir /tombstones/wcnss 0771 system system
-#   mkdir /tombstones/dsps 0771 system system
-#   mkdir /tombstones/mdm 0771 system system
-#   mkdir /tombstones/mdm2 0771 system system
+   mkdir /tombstones/modem 0771 system system
+   mkdir /tombstones/lpass 0771 system system
+   mkdir /tombstones/wcnss 0771 system system
+   mkdir /tombstones/dsps 0771 system system
+   mkdir /tombstones/mdm 0771 system system
+   mkdir /tombstones/mdm2 0771 system system
 
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
@@ -179,10 +173,6 @@ on property:ro.baseband=sglte
 
 # Start up mdm_helper if dsda2 detected
 on property:ro.baseband=dsda2
-    mkdir /data/misc/mdmhelperdata 0700
-    start mdm_helper
-
-on property:ro.baseband=sglte2
     mkdir /data/misc/mdmhelperdata 0700
     start mdm_helper
 

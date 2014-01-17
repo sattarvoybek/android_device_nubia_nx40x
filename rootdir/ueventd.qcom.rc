@@ -155,6 +155,10 @@
 /sys/devices/i2c-12/12-*  enable  0664 system system
 /sys/devices/i2c-12/12-*  poll_delay 0664 system system
 
+# CDMA radio interface MUX
+/dev/ts0710mux*           0640   radio      radio
+/dev/ppp                  0660   radio      vpn
+
 # wlan
 /dev/wcnss_wlan           0660   system     system
 

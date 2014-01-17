@@ -16,8 +16,5 @@
 # internal sdcard
 dev_mount sdcard /storage/sdcard0 25 /devices/platform/msm_sdcc.1/mmc_host nonremovable
 
-# external sdcard
-dev_mount external_sd /storage/sdcard1 auto /devices/platform/msm_sdcc.3/mmc_host
-
 # usbdisk
 dev_mount usb_otg /storage/usbdisk auto /devices/platform/msm_hsusb_host

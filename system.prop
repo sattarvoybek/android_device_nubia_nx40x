@@ -1,5 +1,5 @@
 #
-# system.prop for nx40x
+# system.prop for NX501
 #
 drm.service.enabled=true
 ro.qc.sensors.wl_dis=true

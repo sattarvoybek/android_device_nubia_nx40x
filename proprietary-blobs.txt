@@ -39,22 +39,22 @@ bin/usbhub_init
 bin/usf_epos
 bin/usf_tester
 
+etc/firmware/a225p5_pm4.fw
 etc/firmware/a225_pfp.fw
 etc/firmware/a225_pm4.fw
-etc/firmware/a225p5_pm4.fw
 etc/firmware/a300_pfp.fw
 etc/firmware/a300_pm4.fw
 etc/firmware/cyttsp_8064_mtp.hex
 etc/firmware/cyttsp_8960_cdp.hex
 etc/firmware/leia_pfp_470.fw
 etc/firmware/leia_pm4_470.fw
+etc/firmware/vidc_1080p.fw
 etc/firmware/vidc.b00
 etc/firmware/vidc.b01
 etc/firmware/vidc.b02
 etc/firmware/vidc.b03
-etc/firmware/vidc.mdt
-etc/firmware/vidc_1080p.fw
 etc/firmware/vidcfw.elf
+etc/firmware/vidc.mdt
 
 lib/egl/eglsubAndroid.so
 lib/egl/libEGL_adreno200.so
@@ -206,12 +206,14 @@ lib/libthermalclient.so
 lib/libxml.so
 lib/qnet-plugin.so
 
-lib/hw/camera.msm8960.so
-lib/hw/gps.default.so
 lib/hw/nfc.default.so
-lib/hw/power.default.so
+lib/hw/gps.default.so
+lib/hw/camera.msm8960.so
 lib/hw/sensors.has_gyro.so
+lib/hw/sensors.msm8930.so
 
+vendor/firmware/libpn544_c2_fw.so
+vendor/firmware/libpn544_c3_fw.so
 vendor/firmware/libpn544_fw.so
 
 vendor/lib/libwvdrm_L3.so
