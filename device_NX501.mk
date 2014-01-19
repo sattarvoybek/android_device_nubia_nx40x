@@ -13,6 +13,7 @@ PRODUCT_CHARACTERISTICS := nosdcard
 # HW
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/lib/hw/sensors.has_gyro.so:system/lib/hw/sensors.has_gyro.so \
+    $(LOCAL_PATH)/lib/hw/sensors.has_gyro.so:system/lib/hw/sensors.msm8960.so \
     $(LOCAL_PATH)/lib/hw/camera.msm8960.so:system/lib/hw/camera.msm8960.so \
     $(LOCAL_PATH)/lib/hw/gps.default.so:system/lib/hw/gps.default.so \
     $(LOCAL_PATH)/lib/hw/nfc.default.so:system/lib/hw/nfc.default.so \
