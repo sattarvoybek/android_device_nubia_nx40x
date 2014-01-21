@@ -90,8 +90,8 @@ TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_OVERLAY         := true
 TARGET_USES_SF_BYPASS       := true
 
-# Use retire fence from MDP driver
-#TARGET_DISPLAY_USE_RETIRE_FENCE := true
+# Compatibility with pre-kitkat Qualcomm sensor HALs
+SENSORS_NEED_SETRATE_ON_ENABLE := true
 
 # Camera
 COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK -DQCOM_BSP_CAMERA_ABI_HACK -DNEEDS_VECTORIMPL_SYMBOLS
@@ -149,9 +149,6 @@ USE_DEVICE_SPECIFIC_CAMERA           := true
 USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY := true
 
 HAVE_ADRENO_SOURCE:= false
-
-# Compatibility with pre-kitkat Qualcomm sensor HALs
-SENSORS_NEED_SETRATE_ON_ENABLE := true
 
 # Board specific SELinux policy variable definitions
 BOARD_SEPOLICY_DIRS := \

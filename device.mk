@@ -9,14 +9,6 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 LOCAL_PATH := device/nubia/NX501
 
-# HW
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/lib/hw/camera.msm8960.so:system/lib/hw/camera.msm8960.so \
-    $(LOCAL_PATH)/lib/hw/gps.default.so:system/lib/hw/gps.default.so \
-    $(LOCAL_PATH)/lib/hw/lights.msm8960.so:system/lib/hw/lights.msm8960.so \
-    $(LOCAL_PATH)/lib/hw/sensors.has_gyro.so:system/lib/hw/sensors.has_gyro.so \
-    $(LOCAL_PATH)/lib/hw/sensors.msm8930.so:system/lib/hw/sensors.msm8930.so
-
 # Snd_soc_msm
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/snd_soc_msm/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
@@ -37,7 +29,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
     $(LOCAL_PATH)/configs/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
     $(LOCAL_PATH)/configs/init.qcom.sensor.sh:system/etc/init.qcom.sensor.sh \
-    $(LOCAL_PATH)/configs/init.qcom.thermal_conf.sh:system/etc/init.qcom.thermal_conf.sh \
     $(LOCAL_PATH)/configs/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
@@ -47,7 +38,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/init.crda.sh:system/etc/init.crda.sh \
     $(LOCAL_PATH)/configs/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
     $(LOCAL_PATH)/configs/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
-    $(LOCAL_PATH)/configs/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh
+    $(LOCAL_PATH)/configs/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
+    $(LOCAL_PATH)/configs/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
+    $(LOCAL_PATH)/configs/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
+    $(LOCAL_PATH)/configs/usf_post_boot.sh:system/etc/usf_post_boot.sh \
+    $(LOCAL_PATH)/configs/nfcee_access.xml:system/etc/nfcee_access.xml \
+    $(LOCAL_PATH)/configs/spn-conf.xml:system/etc/spn-conf.xml
 
 # WIFI
 PRODUCT_COPY_FILES += \
@@ -60,16 +56,8 @@ PRODUCT_COPY_FILES += \
 
 # Thermald
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/thermald/thermald-8064.conf:system/etc/thermald-8064.conf \
-    $(LOCAL_PATH)/thermald/thermald-8064ab.conf:system/etc/thermald-8064ab.conf \
-    $(LOCAL_PATH)/thermald/thermald-8930.conf:system/etc/thermald-8930.conf \
-    $(LOCAL_PATH)/thermald/thermald-8930ab.conf:system/etc/thermald-8930ab.conf \
-    $(LOCAL_PATH)/thermald/thermald-8960.conf:system/etc/thermald-8960.conf \
-    $(LOCAL_PATH)/thermald/thermald-8960ab.conf:system/etc/thermald-8960ab.conf \
-    $(LOCAL_PATH)/thermald/thermal-engine-8064ab.conf:system/etc/thermal-engine-8064ab.conf \
-    $(LOCAL_PATH)/thermald/thermal-engine-8064.conf:system/etc/thermal-engine-8064.conf \
-    $(LOCAL_PATH)/thermald/thermal-engine-8930.conf:system/etc/thermal-engine-8930.conf \
-    $(LOCAL_PATH)/thermald/thermal-engine-8960.conf:system/etc/thermal-engine-8960.conf
+    $(LOCAL_PATH)/thermald/thermald.conf:system/etc/thermald.conf \
+    $(LOCAL_PATH)/thermald/thermal-engine.conf:system/etc/thermal-engine.conf
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -110,7 +98,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keys/cyttsp4_mt.idc:system/usr/idc/cyttsp4_mt.idc \
     $(LOCAL_PATH)/keys/pmic8xxx_pwrkey.kcm:system/usr/keychars/pmic8xxx_pwrkey.kcm \
     $(LOCAL_PATH)/keys/pmic8xxx_pwrkey.kl:system/usr/keylayout/pmic8xxx_pwrkey.kl \
-    $(LOCAL_PATH)/keys/zte_cap_touchscreen.idc:system/usr/idc/touch_dev.idc
+    $(LOCAL_PATH)/keys/zte_cap_touchscreen.idc:system/usr/idc/zte_cap_touchscreen.idc
+
+# prebuilt sdcard binary
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/sdcard:system/bin/sdcard
 
 # GPS Location
 PRODUCT_COPY_FILES += \
@@ -123,8 +114,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/xtwifi.conf:system/etc/xtwifi.conf
 
 # TWRP fstab
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery.fstab:recovery/root/etc/recovery.fstab
+PRODUCT_PACKAGES += recovery.fstab
     
 # RAMDISK
 PRODUCT_PACKAGES += fstab.qcom
