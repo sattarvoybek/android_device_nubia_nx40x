@@ -115,7 +115,12 @@ PRODUCT_COPY_FILES += \
 
 # TWRP fstab
 PRODUCT_PACKAGES += recovery.fstab
-    
+
+# SuperSU
+PRODUCT_PACKAGES += \
+    SuperSU \
+    SuperSU_Plus
+
 # RAMDISK
 PRODUCT_PACKAGES += fstab.qcom
 PRODUCT_PACKAGES += init.qcom.rc
@@ -237,8 +242,7 @@ PRODUCT_PACKAGES += \
 
 # Other apps
 PRODUCT_PACKAGES += \
-    OmniTorch \
-    OmniGears
+    OmniTorch
 
 # qcom
 PRODUCT_PROPERTY_OVERRIDES += \
