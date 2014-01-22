@@ -146,7 +146,8 @@ PRODUCT_PACKAGES += \
     audio.primary.msm8960 \
     audio.r_submix.default \
     audio.usb.default \
-    libaudio-resampler
+    libaudio-resampler \
+    libemoji
 
 #dalvik
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -191,7 +192,7 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    lights.msm8960
+    lights.NX501
 
 # Omx
 PRODUCT_PACKAGES += \
@@ -236,7 +237,8 @@ PRODUCT_PACKAGES += \
 
 # Other apps
 PRODUCT_PACKAGES += \
-    OmniTorch
+    OmniTorch \
+    OmniGears
 
 # qcom
 PRODUCT_PROPERTY_OVERRIDES += \

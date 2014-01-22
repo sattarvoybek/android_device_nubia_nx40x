@@ -124,8 +124,8 @@ static int
 set_speaker_light_locked(struct light_device_t* dev,
         struct light_state_t const* state)
 {
-	//ALOGW("light speaker: flashMode %d, flashOnMs %d, flashOffMs %d, color=0x%08x\n",  
-    //        state->flashMode, state->flashOnMS, state->flashOffMS, state->color);
+	ALOGW("light speaker: flashMode %d, flashOnMs %d, flashOffMs %d, color=0x%08x\n",  
+            state->flashMode, state->flashOnMS, state->flashOffMS, state->color);
     
     int red = is_lit(state);
 	red = (red >= 1 && red <= 5) ? red : 0;
@@ -155,8 +155,8 @@ static int
 set_light_battery(struct light_device_t* dev,
         struct light_state_t const* state)
 {
-	//ALOGW("light battery: flashMode %d, flashOnMs %d, flashOffMs %d, color=0x%08x\n",  
-    //        state->flashMode, state->flashOnMS, state->flashOffMS, state->color);
+	ALOGW("light battery: flashMode %d, flashOnMs %d, flashOffMs %d, color=0x%08x\n",  
+            state->flashMode, state->flashOnMS, state->flashOffMS, state->color);
 
     pthread_mutex_lock(&g_lock);
     g_battery = *state;
@@ -169,8 +169,8 @@ static int
 set_light_buttons(struct light_device_t* dev,
         struct light_state_t const* state)
 {
-	//ALOGW("light buttons: flashMode %d, flashOnMs %d, flashOffMs %d, color=0x%08x\n",  
-    //        state->flashMode, state->flashOnMS, state->flashOffMS, state->color);
+	ALOGW("light buttons: flashMode %d, flashOnMs %d, flashOffMs %d, color=0x%08x\n",  
+            state->flashMode, state->flashOnMS, state->flashOffMS, state->color);
 
     int err = 0;
     int on = is_lit(state);
@@ -186,8 +186,8 @@ static int
 set_light_notifications(struct light_device_t* dev,
         struct light_state_t const* state)
 {
-	//ALOGW("light notifications: flashMode %d, flashOnMs %d, flashOffMs %d, color=0x%08x\n",  
-    //        state->flashMode, state->flashOnMS, state->flashOffMS, state->color);
+	ALOGW("light notifications: flashMode %d, flashOnMs %d, flashOffMs %d, color=0x%08x\n",  
+            state->flashMode, state->flashOnMS, state->flashOffMS, state->color);
 
     pthread_mutex_lock(&g_lock);
     g_notification = *state;
@@ -200,8 +200,8 @@ static int
 set_light_attention(struct light_device_t* dev,
         struct light_state_t const* state)
 {
-	//ALOGW("light attention: flashMode %d, flashOnMs %d, flashOffMs %d, color=0x%08x\n",  
-    //        state->flashMode, state->flashOnMS, state->flashOffMS, state->color);
+	ALOGW("light attention: flashMode %d, flashOnMs %d, flashOffMs %d, color=0x%08x\n",  
+            state->flashMode, state->flashOnMS, state->flashOffMS, state->color);
 
     pthread_mutex_lock(&g_lock);
     if (state->flashMode == LIGHT_FLASH_HARDWARE) {
