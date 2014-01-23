@@ -103,6 +103,12 @@ PRODUCT_COPY_FILES += \
 # prebuilt sdcard binary
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/sdcard:system/bin/sdcard
 
+# su binary
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/supersu/bin/.ext/.su:system/bin/.ext/.su \
+    $(LOCAL_PATH)/supersu/xbin/daemonsu:system/xbin/daemonsu \
+    $(LOCAL_PATH)/supersu/xbin/su:system/xbin/su
+
 # GPS Location
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/dbus.conf:system/etc/dbus.conf \
@@ -134,7 +140,7 @@ PRODUCT_PACKAGES += init.qcom.class_core.sh
 PRODUCT_PACKAGES += init.qcom.class_main.sh
 PRODUCT_PACKAGES += init.qcom.early_boot.sh
 PRODUCT_PACKAGES += init.qcom.syspart_fixup.sh
-#PRODUCT_PACKAGES += init.nubia.ums.sh
+PRODUCT_PACKAGES += init.superuser.rc
 #PRODUCT_PACKAGES += init.nubia.ums_adb.sh
 #PRODUCT_PACKAGES += init.nubia.usb.rc
 
