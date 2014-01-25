@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Tab label for version information [CHAR LIMIT=20] -->
+    <string name="appVersion">"版本信息"</string>
+
+    <!-- Body text for new tab when there are no new permissions [CHAR LIMIT=NONE] -->
+    <string name="no_new_perms">"此次更新没有新的权限需求！"</string>
+
+    <string name="grant_confirm_question">"您确定将要授予以下权限吗？应用程序将会获取到："</string>
+
+    <!-- Body text for new tab when there are no permissions [CHAR LIMIT=NONE] -->
+    <string name="no_perms">"此应用程序没有权限需求！"</string>
+
+    <string name="currentVersion">"当前版本:"</string>
+    <string name="newVersion">"新的版本:"</string>
+    <string name="not_available">"不可用"</string>
+</resources>

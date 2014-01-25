@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_workspace_title">主屏设置</string>
+    <string name="pref_title_workspace_rows">每列图标数量</string>
+    <string name="pref_title_workspace_cols">每行图标数量</string>
+    <string name="pref_title_default_workspace">默认主屏</string>
+    <string name="pref_title_show_search_bar">显示搜索栏</string>
+    <string name="application_name">启动器</string>
+</resources>

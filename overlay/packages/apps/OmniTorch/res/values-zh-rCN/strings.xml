@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="flashDevice">/sys/class/leds/flashlight/brightness</string>
+    <string name="flashDeviceLuminosity" />
+    <string name="app_name">手电</string>
+    <string name="about_title">关于</string>
+    <string name="about_close">关闭</string>
+    <string name="description">本应用操作摄像头闪光灯</string>
+    <string name="warning">"警告! 长时间使用LED闪光作为手电会导致过热,必须冷却,否则有烧毁可能.全亮度“总是打开”已经过测试,运行了半小时,但存在的风险,这可能会损坏LED
+"</string>
+    <string name="license">"Original code from Nexus One Torch by Ben Buxton, released under the GPL, v3.
+http://n1torch.googlecode.com/
+
+Modified for OmniRom by Max Weninger"</string>
+    <string name="warning_label">警告</string>
+    <string name="brightwarn">"实验室测试全亮度已经成功地测试了半小时，但LED相当的热，并于45分钟开始闪烁（临时），长时间使用LED所受的影响是未知的。 
+点击“接受”，如果你想使用它需要您自担风险。"</string>
+    <string name="brightwarn_negative">还是算了</string>
+    <string name="brightwarn_accept">同意</string>
+    <string name="label_on">开</string>
+    <string name="label_off">关</string>
+    <string name="label_high">高亮</string>
+    <string name="label_strobe">频闪</string>
+    <string name="label_sos">求救信号</string>
+    <string name="settings">设置</string>
+    <string name="about">关于</string>
+    <string name="widget_options">小部件选项</string>
+    <string name="setting_title_common">常规设置</string>
+    <string name="setting_restart">请重新启动本应用</string>
+    <string name="setting_fullscreen">全屏</string>
+    <string name="setting_bright">高亮</string>
+    <string name="setting_sos">求救信号</string>
+    <string name="setting_strobe">频闪</string>
+    <string name="setting_frequency_title">频闪频率</string>
+    <string name="setting_frequency_dialog">频率</string>
+    <string name="setting_frequency_hz">Hz</string>
+    <string name="setting_add_widget">添加小部件</string>
+    <string name="not_torch_title">手电 开</string>
+    <string name="not_torch_toggle">手电 关</string>
+</resources>
