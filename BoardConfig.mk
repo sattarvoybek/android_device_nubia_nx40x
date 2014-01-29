@@ -26,8 +26,6 @@ TARGET_CPU_SMP           := true
 TARGET_CPU_VARIANT       := krait
 TARGET_BOARD_PLATFORM    := msm8960
 
-TARGET_MPDECISION_BOOST_SOCKET := /dev/socket/mpdecision/touchboost
-
 # Krait optimizations
 TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
 TARGET_USE_KRAIT_PLD_SET             := true
@@ -67,9 +65,6 @@ BOARD_FLASH_BLOCK_SIZE             := 131072
 TARGET_QCOM_MEDIA_VARIANT   := caf
 TARGET_QCOM_DISPLAY_VARIANT := caf
 TARGET_QCOM_AUDIO_VARIANT   := caf
-
-# QCOM enhanced A/V
-TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
 # GPS
 BOARD_HAVE_NEW_QC_GPS := true
@@ -117,7 +112,7 @@ BLUETOOTH_HCI_USE_MCT                       := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/nubia/NX501/bluetooth
 
 # RIL class
-BOARD_RIL_CLASS := ../../../device/nubia/NX501/telephony-common/
+#BOARD_RIL_CLASS := ../../../device/nubia/NX501/telephony-common/
 
 #TARGET_NO_RECOVERY := true
 # Recovery

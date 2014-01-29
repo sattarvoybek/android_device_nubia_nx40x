@@ -163,8 +163,6 @@ PRODUCT_PACKAGES += \
 #dalvik
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-PRODUCT_PACKAGES += libnetcmdiface
-
 #LIBGESTURES
 PRODUCT_PACKAGES += \
     libgestures \
@@ -298,7 +296,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 TARGET_OTA_ASSERT_DEVICE := NX501,nx501
 
 # call dalvik heap config
-$(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 # call hwui memory config
-$(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-hwui-memory.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 #$(call inherit-product, hardware/qcom/msm8960/msm8960.mk)
