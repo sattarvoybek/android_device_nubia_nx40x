@@ -66,6 +66,9 @@ TARGET_QCOM_MEDIA_VARIANT   := caf
 TARGET_QCOM_DISPLAY_VARIANT := caf
 TARGET_QCOM_AUDIO_VARIANT   := caf
 
+# QCOM enhanced A/V
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
+
 # GPS
 BOARD_HAVE_NEW_QC_GPS := true
 
@@ -81,8 +84,8 @@ TARGET_USES_QCOM_COMPRESSED_AUDIO  := true
 TARGET_USES_ION             := true
 USE_OPENGL_RENDERER         := true
 TARGET_USES_C2D_COMPOSITION := true
-TARGET_USES_OVERLAY         := true
-TARGET_USES_SF_BYPASS       := true
+#TARGET_USES_OVERLAY         := true
+#TARGET_USES_SF_BYPASS       := true
 
 # Compatibility with pre-kitkat Qualcomm sensor HALs
 SENSORS_NEED_SETRATE_ON_ENABLE := true
