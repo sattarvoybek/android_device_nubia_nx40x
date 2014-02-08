@@ -84,8 +84,7 @@ TARGET_USES_QCOM_COMPRESSED_AUDIO  := true
 TARGET_USES_ION             := true
 USE_OPENGL_RENDERER         := true
 TARGET_USES_C2D_COMPOSITION := true
-#TARGET_USES_OVERLAY         := true
-#TARGET_USES_SF_BYPASS       := true
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # Compatibility with pre-kitkat Qualcomm sensor HALs
 SENSORS_NEED_SETRATE_ON_ENABLE := true

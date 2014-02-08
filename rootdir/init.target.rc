@@ -201,6 +201,9 @@ service time_daemon /system/bin/time_daemon
    user root
    group root
 
+on property:persist.timed.enable=true
+   start time_daemon
+
 service imsqmidaemon /system/bin/imsqmidaemon
     class main
     user system

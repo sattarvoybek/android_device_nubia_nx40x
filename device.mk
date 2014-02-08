@@ -101,7 +101,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keys/zte_cap_touchscreen.idc:system/usr/idc/zte_cap_touchscreen.idc
 
 # prebuilt sdcard binary
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/sdcard:system/bin/sdcard
+#PRODUCT_COPY_FILES += $(LOCAL_PATH)/sdcard:system/bin/sdcard
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/lib/hw/sensors.msm8960.so:system/lib/hw/sensors.msm8960.so \
 
 # su binary
 PRODUCT_COPY_FILES += \

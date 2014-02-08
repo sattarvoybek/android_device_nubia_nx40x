@@ -731,3 +731,9 @@ service diag_mdlog_stop /system/bin/diag_mdlog -k
 service akmd /system/bin/akmd8963 -o 1
 	class main
 	oneshot
+
+service qrngd /system/bin/qrngd -f
+    class main
+    user root
+    group root
+
