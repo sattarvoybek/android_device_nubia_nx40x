@@ -103,6 +103,10 @@ PRODUCT_COPY_FILES += \
 # prebuilt sdcard binary
 #PRODUCT_COPY_FILES += $(LOCAL_PATH)/sdcard:system/bin/sdcard
 
+#Enable QC time
+PRODUCT_COPY_FILES += \
+    $(TOP)/vendor/nubia/NX501/proprietary/lib/libtime_genoff.so:obj/lib/libtime_genoff.so \
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/lib/hw/sensors.msm8960.so:system/lib/hw/sensors.msm8960.so \
 

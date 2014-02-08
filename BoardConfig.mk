@@ -72,6 +72,9 @@ TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 # GPS
 BOARD_HAVE_NEW_QC_GPS := true
 
+# Enable QC time
+BOARD_USES_QC_TIME_SERVICES := true
+
 # Audio
 BOARD_USES_ALSA_AUDIO              := true
 BOARD_HAVE_NEW_QCOM_CSDCLIENT      := true
