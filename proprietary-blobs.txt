@@ -205,6 +205,8 @@ lib/libtime_genoff.so
 lib/libthermalclient.so
 lib/libxml.so
 lib/qnet-plugin.so
+lib/libgeofence.so
+lib/libExtendedExtractor.so
 
 lib/hw/camera.msm8960.so
 lib/hw/gps.default.so
@@ -219,4 +221,3 @@ vendor/lib/libwvm.so
 vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/drm/libdrmwvmplugin.so
 
-lib/libgeofence.so

@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Copyright (c) 2012, The Linux Foundation. All rights reserved.
+# Copyright (c) 2012, Code Aurora Forum. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -8,7 +8,7 @@
 #     * Redistributions in binary form must reproduce the above copyright
 #       notice, this list of conditions and the following disclaimer in the
 #       documentation and/or other materials provided with the distribution.
-#     * Neither the name of The Linux Foundation nor
+#     * Neither the name of Code Aurora nor
 #       the names of its contributors may be used to endorse or promote
 #       products derived from this software without specific prior written
 #       permission.
@@ -26,51 +26,24 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-#
-# start ril-daemon only for targets on which radio is present
-#
-baseband=`getprop ro.baseband`
-multirild=`getprop ro.multi.rild`
-dsds=`getprop persist.dsds.enabled`
-netmgr=`getprop ro.use_data_netmgrd`
-sgltecsfb=`getprop persist.radio.sglte_csfb`
+# This should be the first command
+# remount system as read-write.
+mount -o rw,remount,barrier=1 /system
 
-case "$baseband" in
-    "apq")
-    setprop ro.radio.noril yes
-    stop ril-daemon
-esac
+# Run modem link script
+/system/bin/sh /system/etc/init.qcom.modem_links.sh
 
-case "$baseband" in
-    "msm" | "csfb" | "svlte2a" | "mdm" | "sglte" | "sglte2" | "dsda2" | "unknown")
-    start qmuxd
-    case "$baseband" in
-        "svlte2a" | "csfb")
-        start qmiproxy
-        ;;
-        "sglte" | "sglte2")
-        if [ "x$sgltecsfb" != "xtrue" ]; then
-          start qmiproxy
-        else
-          setprop persist.radio.voice.modem.index 0
-        fi
-        ;;
-        "dsda2")
-          setprop ro.multi.rild true
-          setprop persist.multisim.config dsda
-          stop ril-daemon
-          start ril-daemon
-          start ril-daemon1
-    esac
-    case "$multirild" in
-        "true")
-         case "$dsds" in
-             "true")
-             start ril-daemon1
-         esac
-    esac
-    case "$netmgr" in
-        "true")
-        start netmgrd
-    esac
-esac
+# Run mdm link script
+/system/bin/sh /system/etc/init.qcom.mdm_links.sh
+
+# Run thermal script
+/system/bin/sh /system/etc/init.qcom.thermald_conf.sh
+
+# This should be the last command
+# remount system as read-only.
+mount -o ro,remount,noatime,noauto_da_alloc /system
+
+# Copy Wi-Fi firmware to /data
+mkdir -p /data/misc/wifi/prima
+cp /persist/WCNSS_* /data/misc/wifi/prima
+
