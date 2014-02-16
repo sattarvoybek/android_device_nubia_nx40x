@@ -39,6 +39,8 @@ bin/usbhub_init
 bin/usf_epos
 bin/usf_tester
 
+bin/location-mq
+
 etc/firmware/a225_pfp.fw
 etc/firmware/a225_pm4.fw
 etc/firmware/a225p5_pm4.fw
